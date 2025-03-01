@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace csharp_training
+namespace addressbook_web_tests
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest_1
     {
         [TestMethod]
         public void TestMethod1()
