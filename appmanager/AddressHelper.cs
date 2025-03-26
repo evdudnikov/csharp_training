@@ -33,10 +33,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public AddressHelper Remove(int v)
+        public AddressHelper Remove()
         {
             manager.Navigator.OpenHomePage();
-            SelectAddress(v);
+            SelectAddress();
             RemoveAddress();
             ReturnToHomePage();
             return this;
@@ -44,13 +44,13 @@ namespace WebAddressbookTests
 
         public AddressHelper ReturnToHomePage()
         {
-            driver.FindElement(By.LinkText("home page")).Click();
+            driver.FindElement(By.LinkText("home")).Click();
             return this;
         }
 
-        public AddressHelper SelectAddress(int index)
+        public AddressHelper SelectAddress()
         {
-            driver.FindElement(By.XPath("//*[@id=[" + index + "]")).Click();
+            driver.FindElement(By.XPath("//*[@id='maintable']//tr[2]/td[1]")).Click();
             return this;
         }
 
@@ -80,13 +80,9 @@ namespace WebAddressbookTests
 
         public AddressHelper FillAddressForm(AddressData group)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(group.FirstName);
+            Type(By.Name("firstname"), group.FirstName);
             driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(group.LastName);
+            Type(By.Name("lastname"), group.LastName);
             driver.FindElement(By.Name("nickname")).Click();
             driver.FindElement(By.Name("title")).Click();
             driver.FindElement(By.Name("company")).Click();
@@ -111,13 +107,9 @@ namespace WebAddressbookTests
 
         public AddressHelper EditAddressForm(AddressData group)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(group.FirstName);
+            Type(By.Name("firstname"), group.FirstName);
             driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(group.LastName);
+            Type(By.Name("lastname"), group.LastName);
             driver.FindElement(By.Name("nickname")).Click();
             driver.FindElement(By.Name("title")).Click();
             driver.FindElement(By.Name("company")).Click();
