@@ -63,6 +63,7 @@ namespace WebAddressbookTests
         }
         public GroupHelper FillGroupForm(GroupData group)
         {
+
             Type(By.Name("group_name"), group.Name);
             Type(By.Name("group_header"), group.Header);
             Type(By.Name("group_footer"), group.Footer);
@@ -84,6 +85,14 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("edit")).Click();
 
             return this;
+        }
+
+        public void EnsureGroupExists(int index)
+        {
+            if (!IsElementPresent(By.XPath("//*[@id='content']/form/span["+ index +"]/input")))
+            {
+                Create(new GroupData("Test Group"));
+            }
         }
     }
 }
