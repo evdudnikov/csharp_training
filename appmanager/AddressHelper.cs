@@ -26,6 +26,7 @@ namespace WebAddressbookTests
         public AddressHelper Modify(AddressData newData)
         {
             manager.Navigator.OpenHomePage();
+            EnsureAddressExists();
             InitAddressModification();
             EditAddressForm(newData);
             SubmitAddressModification();
@@ -36,6 +37,7 @@ namespace WebAddressbookTests
         public AddressHelper Remove()
         {
             manager.Navigator.OpenHomePage();
+            EnsureAddressExists();
             SelectAddress();
             RemoveAddress();
             ReturnToHomePage();
@@ -129,6 +131,15 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("amonth")).Click();
             driver.FindElement(By.Name("ayear")).Click();
             return this;
+        }
+        public void EnsureAddressExists()
+        {
+            var addresses = driver.FindElements
+                (By.XPath("//*[@id='maintable']//tr"));
+            if (addresses.Count <= 1) 
+            {
+                Create(new AddressData("Test", "User")); 
+            }
         }
     }
 }
