@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace WebAddressbookTests
@@ -13,9 +14,9 @@ namespace WebAddressbookTests
         [Test]
         public void AddressCreationTest()
         {
-            AddressData group = new AddressData("Mike", "Adrian");
+            AddressData newAddress = new AddressData("Mike", "Adrian");
 
-            app.NewAddress.Create(group); 
+            app.NewAddress.Create(newAddress);
             app.Auth.Logout();
         }
 

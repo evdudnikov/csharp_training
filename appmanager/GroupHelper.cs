@@ -25,7 +25,6 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            EnsureGroupExists(v);
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -36,7 +35,6 @@ namespace WebAddressbookTests
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
-            EnsureGroupExists(v);
             SelectGroup(v);
             RemoveGroup();
             ReturnToGroupsPage();
@@ -49,7 +47,7 @@ namespace WebAddressbookTests
         }
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + (index + 1) + "]/input")).Click();
             return this;
         }
         public GroupHelper RemoveGroup()
@@ -90,10 +88,23 @@ namespace WebAddressbookTests
 
         public void EnsureGroupExists(int index)
         {
-            if (!IsElementPresent(By.XPath("//*[@id='content']/form/span[" + index + "]/input")))
+            manager.Navigator.GoToGroupsPage();
+            if (!IsElementPresent(By.XPath("//*[@id='content']/form/span[" + (index + 1) + "]/input")))
             {
                 Create(new GroupData("Test Group"));
             }
+        }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements) 
+            {
+               groups.Add(new GroupData(element.Text));
+            }
+            return groups;
         }
     }
 }

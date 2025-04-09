@@ -13,9 +13,11 @@ namespace WebAddressbookTests
         [Test]
         public void AddressModificationTest()
         {
-            AddressData newData = new AddressData("John", "Cena");
+            app.NewAddress.EnsureAddressExists();
 
-            app.NewAddress.Modify(newData);
+            AddressData newAddress = new AddressData("John", "Cena");
+
+            app.NewAddress.Modify(newAddress);
             app.Auth.Logout();
         }
     }

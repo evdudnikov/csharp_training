@@ -14,6 +14,7 @@ namespace WebAddressbookTests
         [Test]
         public void AddressRemovalTest()
         {
+            app.NewAddress.EnsureAddressExists();
             app.NewAddress.Remove();
             app.Auth.Logout();
         }

@@ -26,7 +26,6 @@ namespace WebAddressbookTests
         public AddressHelper Modify(AddressData newData)
         {
             manager.Navigator.OpenHomePage();
-            EnsureAddressExists();
             InitAddressModification();
             EditAddressForm(newData);
             SubmitAddressModification();
@@ -37,7 +36,6 @@ namespace WebAddressbookTests
         public AddressHelper Remove()
         {
             manager.Navigator.OpenHomePage();
-            EnsureAddressExists();
             SelectAddress();
             RemoveAddress();
             ReturnToHomePage();
